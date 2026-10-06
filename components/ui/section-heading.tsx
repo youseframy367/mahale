@@ -15,7 +15,7 @@ export function SectionHeading({
   action,
 }: SectionHeadingProps) {
   const actionHref =
-    action === "تصفح كل المنتجات" ? "/store" : "/stores";
+    action === "تصفح كل المنتجات" ? "/matger" : "/stores";
 
   return (
     <header className="mb-8 flex items-end justify-between gap-8 md:mb-10">
