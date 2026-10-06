@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
 import {
@@ -383,10 +384,12 @@ function ProductCard({ product }: { product: Product }) {
     <article className="group overflow-hidden rounded-2xl border border-[#e1ebe5] bg-white shadow-[0_2px_10px_rgba(23,35,29,0.03)] transition-all hover:-translate-y-1 hover:shadow-[0_10px_26px_rgba(23,35,29,0.08)]">
       <Link href={`/product/${product.slug}`} className="block">
         <div className="relative aspect-[1.05] overflow-hidden bg-[#f3f7f4]">
-          <img
+          <Image
             src={product.image}
             alt={product.name}
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            fill
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
 
           {!product.available && (

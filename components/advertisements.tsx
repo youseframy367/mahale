@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
 
 const whatsappUrl =
@@ -54,11 +55,15 @@ export default function Advertisements() {
             key={ad.title}
             className="overflow-hidden rounded-2xl border border-[#e1ebe5] bg-white shadow-[0_2px_10px_rgba(23,35,29,0.03)]"
           >
-            <img
+            <div className="relative h-40">
+            <Image
               src={ad.image}
               alt={ad.title}
-              className="h-40 w-full object-cover"
+              fill
+              sizes="(max-width: 1024px) 100vw, 33vw"
+              className="object-cover"
             />
+            </div>
 
             <div className="p-4">
               <span className="rounded-full bg-[#fff4d9] px-2.5 py-1 text-[10px] font-semibold text-[#94701c]">

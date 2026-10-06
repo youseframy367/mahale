@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowLeft, Box, MapPin } from "lucide-react";
 import type { Category, Product, Shop } from "@/data/mock-data";
 import { FavoriteButton } from "./favorite-button";
@@ -6,7 +7,7 @@ export function ShopCard({ shop }: { shop: Shop }) {
   return (
     <article className="group overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1.5 hover:shadow-card">
       <div className="relative h-56 overflow-hidden">
-        <img src={shop.image} alt={`واجهة محل ${shop.name}`} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+        <Image src={shop.image} alt={`واجهة محل ${shop.name}`} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition duration-500 group-hover:scale-105" />
         <span className="absolute top-4 left-4 rounded-full bg-white/90 px-3 py-1.5 text-xs font-bold text-brand-600 backdrop-blur">موثّق</span>
       </div>
       <div className="relative p-5 pt-0">
@@ -33,7 +34,7 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <article className="group min-w-[78%] snap-start overflow-hidden rounded-2xl border border-stone-200 bg-white transition duration-300 hover:-translate-y-1 hover:shadow-card sm:min-w-0">
       <div className="relative h-72 overflow-hidden bg-stone-100 lg:h-64">
-        <img src={product.image} alt={product.name} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+        <Image src={product.image} alt={product.name} fill sizes="(max-width: 640px) 78vw, (max-width: 1024px) 50vw, 25vw" className="object-cover transition duration-500 group-hover:scale-105" />
         <FavoriteButton productName={product.name} />
       </div>
       <div className="p-4">

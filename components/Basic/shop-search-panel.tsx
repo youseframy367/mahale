@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Search, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -129,9 +130,11 @@ export function ShopSearchPanel({
                   className="flex items-center gap-3 rounded-xl p-3 transition hover:bg-brand-50"
                 >
                   <div className="size-12 shrink-0 overflow-hidden rounded-xl border border-stone-100 bg-stone-50">
-                    <img
+                    <Image
                       src={shop.logo}
                       alt={shop.name}
+                      width={48}
+                      height={48}
                       className="size-full object-cover"
                     />
                   </div>
