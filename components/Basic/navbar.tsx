@@ -5,9 +5,9 @@ import { useState } from "react";
 import { Logo } from "@/components/ui/logo";
 import { ShopSearchPanel } from "./shop-search-panel";
 const links = [
-  { label: "اكتشف المحلات", href: "#shops" },
-  { label: "التصنيفات", href: "#categories" },
-  { label: "كيف يعمل؟", href: "#how" },
+  { label: "اكتشف المحلات", href: "/stores" },
+  { label: "التصنيفات", href: "/matger" },
+  { label: "كيف يعمل؟", href: "/#how" },
 ];
 
 export function Navbar() {
@@ -37,7 +37,7 @@ export function Navbar() {
           {/* Mobile CTA */}
           <div className="mt-4 flex md:hidden">
             <a
-              href="./AddStore"
+              href="/AddStore"
               onClick={() => setIsOpen(false)}
               className="w-full rounded-xl bg-brand-600 px-5 py-3 text-center text-sm font-bold text-white"
             >
@@ -59,7 +59,7 @@ export function Navbar() {
           </button>
 
           <a
-            href="./AddStore"
+            href="/AddStore"
             className="rounded-xl bg-brand-600 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-emerald-900/10 transition hover:-translate-y-0.5 hover:bg-brand-700"
           >
             أضف محلك
@@ -71,6 +71,7 @@ export function Navbar() {
           <button
             type="button"
             aria-label="بحث"
+            onClick={() => setIsSearchOpen((current) => !current)}
             className="grid size-10 place-items-center rounded-full border border-stone-200 transition hover:border-brand-200 hover:text-brand-600"
           >
             <Search aria-hidden="true" className="size-5" />

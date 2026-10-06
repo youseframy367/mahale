@@ -9,6 +9,13 @@ export type Shop = {
   category: string
   categorySlug: string
   description: string
+  longDescription?: string
+  address?: string
+  phone?: string
+  whatsapp?: string
+  workingHours?: string
+  deliveryAvailable?: boolean
+  paymentMethods?: string[]
   productsCount: number
   featured: boolean
 }

@@ -7,30 +7,35 @@ const shops = [
   {
     id: 1,
     name: "Ahmed Fashion",
+    slug: "ahmed-fashion",
     address: "المنصورة، شارع الجمهورية",
     logo: "/shops/ahmed-fashion.jpg",
   },
   {
     id: 2,
     name: "كافيه زمان",
+    slug: "coffee-house",
     address: "المنصورة، شارع المشاية",
     logo: "/shops/zaman-cafe.jpg",
   },
   {
     id: 3,
     name: "بيت الإلكترونيات",
+    slug: "tech-zone",
     address: "المنصورة، شارع الجيش",
     logo: "/shops/electronics.jpg",
   },
   {
     id: 4,
     name: "حلويات السعادة",
+    slug: "rose-sweets",
     address: "المنصورة، شارع قناة السويس",
     logo: "/shops/sweets.jpg",
   },
   {
     id: 5,
     name: "Style Store",
+    slug: "stylek",
     address: "المنصورة، شارع أحمد ماهر",
     logo: "/shops/style.jpg",
   },
@@ -119,7 +124,7 @@ export function ShopSearchPanel({
               {filteredShops.map((shop) => (
                 <a
                   key={shop.id}
-                  href={`/store/${shop.name}`}
+                  href={`/store/${shop.slug}`}
                   onClick={onClose}
                   className="flex items-center gap-3 rounded-xl p-3 transition hover:bg-brand-50"
                 >
