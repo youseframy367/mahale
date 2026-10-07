@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Navbar } from "@/components/Basic/navbar";
-import { Footer } from "@/components/Basic/footer";
+import { SiteChrome } from "@/components/Basic/site-chrome";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -16,11 +15,7 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl">
       <body>
-        <Navbar />
-
-        {children}
-
-        <Footer />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );
