@@ -22,7 +22,23 @@ export type SponsoredAd = {
   status: 'نشط' | 'مسودة'
 }
 
+export type TeamRole = 'owner' | 'sales'
+
+export type TeamUser = {
+  id: number
+  name: string
+  email: string
+  password: string
+  role: TeamRole
+}
+
 export const dashboardCredentials = { email: 'yousseframy@gmail.com', password: '2005' }
+
+export const initialTeamUsers: TeamUser[] = [
+  { id: 1, name: 'يُوسِف رامي', email: dashboardCredentials.email, password: dashboardCredentials.password, role: 'owner' },
+]
+
+export const teamRoleLabels: Record<TeamRole, string> = { owner: 'Owner', sales: 'Sales' }
 
 export const initialDashboardShops: DashboardShop[] = [
   { id: 1, name: 'أحمد فاشون', slug: 'ahmed-fashion', location: 'المنصورة، الدقهلية', phone: '01023522063', category: 'ملابس', sponsoredAds: 3, joinedAt: '2025/09/14', password: 'A7kL9pQ2xZ1', logo: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=240&q=85', cover: 'https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=900&q=85' },
