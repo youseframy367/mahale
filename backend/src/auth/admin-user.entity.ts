@@ -1,0 +1,3 @@
+import { Column,CreateDateColumn,Entity,Index,PrimaryGeneratedColumn,UpdateDateColumn } from 'typeorm';
+export enum AdminRole { OWNER='owner', SALES='sales' }
+@Entity('admin_users') export class AdminUser { @PrimaryGeneratedColumn('uuid') id!:string; @Column({length:150}) name!:string; @Index({unique:true}) @Column({length:255}) email!:string; @Column({name:'password_hash',type:'text',select:false}) passwordHash!:string; @Column({type:'enum',enum:AdminRole,default:AdminRole.SALES}) role!:AdminRole; @Column({name:'is_active',default:true}) isActive!:boolean; @CreateDateColumn({name:'created_at',type:'timestamptz'}) createdAt!:Date; @UpdateDateColumn({name:'updated_at',type:'timestamptz'}) updatedAt!:Date }

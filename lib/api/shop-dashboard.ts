@@ -1,0 +1,5 @@
+import { apiRequest } from './client'
+export type ShopProfile={id:string;name:string;slug:string;location?:string;phone?:string;category?:string;description?:string;logoUrl?:string;coverUrl?:string}
+export type Product={id:string;shopId:string;name:string;slug:string;price:number;description?:string;imageUrl?:string;available:boolean}
+export type SponsoredAd={id:string;shopId:string;title:string;description:string;phone?:string;imageUrl?:string;status:'draft'|'active'|'paused'|'expired'}
+export const shopApi={getProfile:(id:string)=>apiRequest<ShopProfile>(`/shops/${id}`),updateProfile:(id:string,data:Partial<ShopProfile>)=>apiRequest<ShopProfile>(`/shops/${id}`,{method:'PATCH',body:JSON.stringify(data)}),getProducts:(id:string)=>apiRequest<Product[]>(`/shops/${id}/products`),createProduct:(id:string,data:Partial<Product>)=>apiRequest<Product>(`/shops/${id}/products`,{method:'POST',body:JSON.stringify(data)}),getAds:(id:string)=>apiRequest<SponsoredAd[]>(`/shops/${id}/ads`),createAd:(id:string,data:Partial<SponsoredAd>)=>apiRequest<SponsoredAd>(`/shops/${id}/ads`,{method:'POST',body:JSON.stringify(data)})}

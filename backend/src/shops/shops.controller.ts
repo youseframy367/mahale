@@ -1,0 +1,2 @@
+import { Body,Controller,Get,Param,Patch } from '@nestjs/common'; import { ShopsService } from './shops.service';
+@Controller('shops') export class ShopsController { constructor(private service:ShopsService){} @Get(':id') get(@Param('id') id:string){return this.service.findOne(id)} @Patch(':id') update(@Param('id') id:string,@Body() body:Record<string,unknown>){return this.service.update(id,body)} }

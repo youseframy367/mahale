@@ -1,0 +1,2 @@
+import { Injectable,NotFoundException } from '@nestjs/common'; import { InjectRepository } from '@nestjs/typeorm'; import { Repository } from 'typeorm'; import { Shop } from './shop.entity';
+@Injectable() export class ShopsService { constructor(@InjectRepository(Shop) private repo:Repository<Shop>){} findOne(id:string){return this.repo.findOneBy({id})} async update(id:string,data:Partial<Shop>){const shop=await this.findOne(id); if(!shop) throw new NotFoundException('المحل غير موجود'); Object.assign(shop,data); return this.repo.save(shop)} }

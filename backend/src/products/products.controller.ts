@@ -1,0 +1,2 @@
+import { Body,Controller,Get,Param,Post } from '@nestjs/common'; import { ProductsService } from './products.service';
+@Controller('shops/:shopId/products') export class ProductsController { constructor(private service:ProductsService){} @Get() list(@Param('shopId') shopId:string){return this.service.list(shopId)} @Post() create(@Param('shopId') shopId:string,@Body() body:Record<string,unknown>){return this.service.create(shopId,body)} }

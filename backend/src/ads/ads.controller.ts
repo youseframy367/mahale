@@ -1,0 +1,2 @@
+import { Body,Controller,Get,Param,Post } from '@nestjs/common'; import { AdsService } from './ads.service';
+@Controller('shops/:shopId/ads') export class AdsController { constructor(private service:AdsService){} @Get() list(@Param('shopId') shopId:string){return this.service.list(shopId)} @Post() create(@Param('shopId') shopId:string,@Body() body:Record<string,unknown>){return this.service.create(shopId,body)} }

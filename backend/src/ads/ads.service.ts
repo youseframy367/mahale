@@ -1,0 +1,2 @@
+import { Injectable } from '@nestjs/common'; import { InjectRepository } from '@nestjs/typeorm'; import { Repository } from 'typeorm'; import { SponsoredAd } from './ad.entity';
+@Injectable() export class AdsService { constructor(@InjectRepository(SponsoredAd) private repo:Repository<SponsoredAd>){} list(shopId:string){return this.repo.find({where:{shopId},order:{createdAt:'DESC'}})} create(shopId:string,data:Partial<SponsoredAd>){return this.repo.save(this.repo.create({...data,shopId}))} }
