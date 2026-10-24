@@ -3,12 +3,13 @@ import { Hero } from "@/components/home/hero";
 import { HowItWorks } from "@/components/home/how-it-works";
 import { OwnerCta } from "@/components/home/owner-cta";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { categories } from "@/data/mock-data";
+import { categories as categoryTemplates } from "@/data/mock-data";
 import { getPublicProducts, getPublicShops } from "@/lib/public-api";
 import { Search } from "lucide-react";
 import Advertisements from "@/components/advertisements";
 export default async function HomePage() {
   const [publicShops, products] = await Promise.all([getPublicShops(), getPublicProducts()])
+  const categories = categoryTemplates.map((category) => ({ ...category, count: `${publicShops.filter((shop) => shop.category === category.name).length} محلات` }))
   const shops = publicShops.slice(0, 3).map((shop) => ({ name: shop.name, category: shop.category, location: shop.location, productCount: shop.productsCount, image: shop.cover, logo: shop.name.slice(0, 1), logoClass: "bg-[#2e5247] text-[#f9dfb8]", phone: shop.phone || "", whatsapp: shop.whatsapp || "" }))
   return (
     <>

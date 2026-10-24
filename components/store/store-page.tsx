@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
 import { ArrowLeft, Check, Clock3, ExternalLink, Heart, MapPin, MessageCircle, Phone, Search, Share2, ShieldCheck, ShoppingBag, Star, X } from 'lucide-react'
-import { makeShopProducts, type ShopProduct } from '@/data/shop-products'
+import type { ShopProduct } from '@/data/shop-products'
 import type { Shop } from '@/data/shops'
 
 export default function StorePageClient({ shop, relatedShops = [] }: { shop: Shop; relatedShops?: Shop[] }) {
@@ -12,7 +12,7 @@ export default function StorePageClient({ shop, relatedShops = [] }: { shop: Sho
   const [liked, setLiked] = useState<number[]>([])
   const [quickProduct, setQuickProduct] = useState<ShopProduct | null>(null)
   const [activeCategory, setActiveCategory] = useState('الكل')
-  const products = useMemo(() => shop.products ?? makeShopProducts(shop.name, shop.category, shop.slug), [shop])
+  const products = useMemo(() => shop.products ?? [], [shop])
   const categories = ['الكل', ...Array.from(new Set(products.map((product) => product.category)))]
   const filteredProducts = products.filter((product) => (activeCategory === 'الكل' || product.category === activeCategory) && product.name.includes(query))
   const suggestedShops = useMemo(() => relatedShops.filter((item) => item.categorySlug === shop.categorySlug || item.governorate === shop.governorate).slice(0, 3), [relatedShops, shop])
