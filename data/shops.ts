@@ -18,6 +18,7 @@ export type Shop = {
   paymentMethods?: string[]
   productsCount: number
   featured: boolean
+  products?: import('./shop-products').ShopProduct[]
 }
 
 const image = (id: string, width = 900) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${width}&q=85`

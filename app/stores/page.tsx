@@ -2,9 +2,10 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { MapPin, Search, SlidersHorizontal, Sparkles, Store, X } from 'lucide-react'
-import { categories, governorates, shops, sortOptions, whatsappUrl, type Shop } from '@/data/shops'
+import { categories, governorates, sortOptions, whatsappUrl, type Shop } from '@/data/shops'
+import { getPublicShops } from '@/lib/public-api'
 
 export default function StoresPage() {
   const [query, setQuery] = useState('')
@@ -12,6 +13,9 @@ export default function StoresPage() {
   const [category, setCategory] = useState(categories[0])
   const [sort, setSort] = useState(sortOptions[0])
   const [filtersOpen, setFiltersOpen] = useState(false)
+  const [shops, setShops] = useState<Shop[]>([])
+  const [loading, setLoading] = useState(true)
+  useEffect(() => { getPublicShops().then(setShops).finally(() => setLoading(false)) }, [])
 
   const filteredShops = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase()
@@ -22,8 +26,8 @@ export default function StoresPage() {
         (category === categories[0] || shop.category === category)
     })
 
-    return [...result].sort((a, b) => sort === 'الأكثر منتجات' ? b.productsCount - a.productsCount : sort === 'المحلات المميزة' ? Number(b.featured) - Number(a.featured) : a.id - b.id)
-  }, [category, governorate, query, sort])
+    return [...result].sort((a, b) => sort === 'الأكثر منتجات' ? b.productsCount - a.productsCount : sort === 'المحلات المميزة' ? Number(b.featured) - Number(a.featured) : String(a.id).localeCompare(String(b.id)))
+  }, [category, governorate, query, sort, shops])
 
   const clearFilters = () => {
     setQuery('')
@@ -61,7 +65,7 @@ export default function StoresPage() {
           <button type="button" onClick={clearFilters} className="h-11 shrink-0 rounded-xl px-4 text-sm font-bold text-[#087a55] transition hover:bg-[#f1f8f3]">مسح الفلاتر</button>
         </div>
 
-        {filteredShops.length ? <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{filteredShops.map((shop) => <ShopCard key={shop.id} shop={shop} />)}</div> : <EmptyState onClear={clearFilters} />}
+        {loading ? <div className="mt-10 rounded-2xl bg-white p-12 text-center text-sm text-[#718078]">جاري تحميل المحلات من السيرفر...</div> : filteredShops.length ? <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{filteredShops.map((shop) => <ShopCard key={shop.id} shop={shop} />)}</div> : <EmptyState onClear={clearFilters} />}
 
         <section className="mt-14 overflow-hidden rounded-[28px] border border-[#cfe4d6] bg-[#eef8f1] p-6 sm:p-10">
           <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-center">
