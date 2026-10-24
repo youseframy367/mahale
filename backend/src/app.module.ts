@@ -6,6 +6,7 @@ import { ShopsModule } from './shops/shops.module'
 import { ProductsModule } from './products/products.module'
 import { AdsModule } from './ads/ads.module'
 import { AdminModule } from './admin/admin.module'
+import { PublicModule } from './public/public.module'
 
-@Module({ imports: [ConfigModule.forRoot({ isGlobal: true }), TypeOrmModule.forRootAsync({ inject: [ConfigService], useFactory: (c: ConfigService) => ({ type: 'postgres', url: c.getOrThrow('DATABASE_URL'), autoLoadEntities: true, synchronize: c.get('DB_SYNCHRONIZE') === 'true' }) }), AuthModule, AdminModule, ShopsModule, ProductsModule, AdsModule] })
+@Module({ imports: [ConfigModule.forRoot({ isGlobal: true }), TypeOrmModule.forRootAsync({ inject: [ConfigService], useFactory: (c: ConfigService) => ({ type: 'postgres', url: c.getOrThrow('DATABASE_URL'), autoLoadEntities: true, synchronize: c.get('DB_SYNCHRONIZE') === 'true' }) }), AuthModule, AdminModule, PublicModule, ShopsModule, ProductsModule, AdsModule] })
 export class AppModule {}
