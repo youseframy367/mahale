@@ -1,48 +1,21 @@
-# Mahally API
 
-Backend مستقل داخل نفس الريبو، مبني باستخدام NestJS + TypeORM + PostgreSQL.
+## Owner Dashboard API
 
-## التشغيل المحلي
-
-```bash
-cp .env.example .env
-docker compose up -d postgres
-npm install
-npm run migration:run
-npm run seed
-npm run start:dev
-```
-
-السيرفر يعمل على `http://localhost:4000` والـ API prefix هو `/api`.
-
-## الحسابات التجريبية بعد Seed
-
-- Owner: `yousseframy@gmail.com` / `2005`
-- Shop owner: `ahmed@example.com` / `Ahmad1234`
-
-## Endpoints
+بعد تسجيل دخول Owner أو Sales باستخدام `/api/auth/login`، تُستخدم الـ endpoints التالية:
 
 ```text
-POST   /api/auth/login
-GET    /api/shops/:id
-PATCH  /api/shops/:id
-GET    /api/shops/:shopId/products
-POST   /api/shops/:shopId/products
-PATCH  /api/shops/:shopId/products/:id
-DELETE /api/shops/:shopId/products/:id
-GET    /api/shops/:shopId/ads
-POST   /api/shops/:shopId/ads
-PATCH  /api/shops/:shopId/ads/:id
-DELETE /api/shops/:shopId/ads/:id
+GET    /api/admin/overview
+GET    /api/admin/shops
+POST   /api/admin/shops
+PATCH  /api/admin/shops/:id
+DELETE /api/admin/shops/:id
+GET    /api/admin/ads
+POST   /api/admin/shops/:shopId/ads
+PATCH  /api/admin/ads/:id
+DELETE /api/admin/ads/:id
+GET    /api/admin/users
+POST   /api/admin/users       # Owner فقط
+DELETE /api/admin/users/:id   # Owner فقط
 ```
 
-كل المسارات الخاصة بالمحل محمية بـ JWT، وصاحب المحل لا يستطيع الوصول إلى `shopId` مختلف عن الموجود داخل الـ token.
-
-## Production checklist
-
-- استخدم `DATABASE_URL` من مزود PostgreSQL Production.
-- ضع `JWT_SECRET` عشوائيًا طويلًا ولا تستخدم قيمة `.env.example`.
-- اجعل `DB_SYNCHRONIZE=false` دائمًا في Production.
-- شغّل `npm run migration:run` أثناء الـ deployment.
-- شغّل `npm run seed` مرة واحدة فقط لإنشاء الحسابات الأولية، ثم غيّر كلمات المرور.
-- اربط `NEXT_PUBLIC_API_URL` بعنوان API العام قبل بناء Next.js.
+داشبورد Owner تستخدم هذه المسارات مباشرة، ولم تعد تحفظ المحلات أو الإعلانات أو أعضاء الفريق في `localStorage`.

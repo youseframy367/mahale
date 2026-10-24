@@ -8,7 +8,7 @@ import { DashboardHeader } from '@/components/dashboard/dashboard-shell'
 import { useDashboardData } from '@/components/dashboard/dashboard-data'
 
 export default function EditClientPage() {
-  const { id } = useParams<{ id: string }>(); const router = useRouter(); const { shops, updateShop } = useDashboardData(); const shop = shops.find((item) => item.id === Number(id)); const [form, setForm] = useState({ name: '', location: '', phone: '', category: '' })
+  const { id } = useParams<{ id: string }>(); const router = useRouter(); const { shops, updateShop } = useDashboardData(); const shop = shops.find((item) => String(item.id) === id); const [form, setForm] = useState({ name: '', location: '', phone: '', category: '' })
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { if (shop) setForm({ name: shop.name, location: shop.location, phone: shop.phone, category: shop.category }) }, [shop])
   if (!shop) return <div className="p-8">العميل غير موجود.</div>
